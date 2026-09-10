@@ -121,6 +121,13 @@ class RedisClient
       assert_parses({ 'first' => 1, 'second' => 2 }, "%2\r\n+first\r\n:1\r\n+second\r\n:2\r\n")
     end
 
+    def test_load_missing_type_byte
+      error = assert_raises RESP3::Error do
+        RESP3.load(StringIO.new("".b))
+      end
+      assert_includes error.message, "end of stream"
+    end
+
     def test_load_large_map
       entries = 100_000
       payload = +"%#{entries}\r\n"
