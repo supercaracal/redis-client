@@ -1,5 +1,7 @@
 # Unreleased
 
+- Raise `RedisClient::ProtocolError` instead of `NoMethodError` when the RESP3 parser hits an unexpected end of stream.
+
 # 0.30.1
 
 - hiredis-client: Use `pkg-config` to locate OpenSSL. Should fix compilation issue on precompiled rubies such as the ones from `mise`.

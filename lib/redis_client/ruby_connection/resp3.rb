@@ -137,6 +137,8 @@ class RedisClient
         parse_set(io)
       elsif type == 62 # '>'.ord
         parse_array(io)
+      elsif type.nil?
+        raise SyntaxError, "Unexpected end of stream"
       else
         raise UnknownType, "Unknown sigil type: #{type.chr.inspect}"
       end
